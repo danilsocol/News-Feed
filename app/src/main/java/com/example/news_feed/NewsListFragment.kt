@@ -29,7 +29,7 @@ class NewsListFragment : Fragment() {
 
         init()
         viewModel.init()
-        return inflater.inflate(R.layout.fragment_news_list, container, false)
+        return binding.root
     }
 
     private fun init() {
