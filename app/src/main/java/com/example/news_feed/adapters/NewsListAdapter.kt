@@ -1,16 +1,17 @@
-package com.example.news_feed
+package com.example.news_feed.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.news_feed.models.NewsModel
 import com.example.news_feed.databinding.ViewTypeBinding
 import com.example.news_feed.databinding.ViewTypeImageBinding
 import com.example.news_feed.databinding.ViewTypeImageCircleBinding
 
 
-class NewsAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiffCallback()) {
+class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return when (viewType) {
@@ -49,10 +50,10 @@ class NewsAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiffCall
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (getItem(position).viewType) {
-            0 -> 0
-            1 -> 1
-            2 -> 2
+        return when (getItem(position)) {
+            is NewsModel.NewsModelImage -> 0
+            is NewsModel.NewsModelImageHasBag -> 1
+            is NewsModel.NewsModelCircleImage -> 2
             else -> 4
         }
     }
