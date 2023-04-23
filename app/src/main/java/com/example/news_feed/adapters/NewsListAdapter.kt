@@ -3,11 +3,9 @@ package com.example.news_feed.adapters
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.example.news_feed.R
 import com.example.news_feed.models.NewsModel
 import com.example.news_feed.databinding.ViewTypeBinding
@@ -93,12 +91,10 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
         fun bind(news: NewsModel.NewsModelImage) = with(binding) {
             header.text = news.title
             subHeader.text = news.subtitle
-           /* val img = news.img!!.toUri().buildUpon().scheme("https").build()
-            image.load(img){
-                placeholder(R.drawable.loading_animation)
-               *//* error(R.drawable.ic_broken_image)*//*
-            }*/
-            Picasso.get().load(news.img).into(image)
+            Picasso.get().load(news.img)
+                .placeholder(R.drawable.animeted_loading)
+                .error(R.drawable.ic_broken_image)
+                .into(image)
         }
     }
 
@@ -107,14 +103,10 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
         fun bind(news: NewsModel.NewsModelImageHasBag) = with(binding) {
             header.text = news.title
             subHeader.text = news.subtitle
-            /*containerText.setBackgroundColor(news.hasBag) */ //todo изменить цвет
-            /*val img = news.img!!.toUri().buildUpon().scheme("https").build()
-            image.load(img){
-                placeholder(R.drawable.loading_animation)
-                *//*error(R.drawable.ic_broken_image)*//*
-            }*/
-
-            Picasso.get().load(news.img).into(image)
+            Picasso.get().load(news.img)
+                .placeholder(R.drawable.animeted_loading)
+                .error(R.drawable.ic_broken_image)
+                .into(image)
         }
     }
 
@@ -123,14 +115,10 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
         fun bind(news: NewsModel.NewsModelCircleImage) = with(binding) {
             header.text = news.title
             subHeader.text = news.subtitle
-
-            Log.d("test",news.img!!)
-          /*  news.img.let {
-                val imgUri = news.img!!.toUri().buildUpon().scheme("https").build()
-                image.load(imgUri)
-            }*/
-
-            Picasso.get().load(news.img).into(image)
+            Picasso.get().load(news.img)
+                .placeholder(R.drawable.animeted_loading)
+                .error(R.drawable.ic_broken_image)
+                .into(image)
         }
     }
 
