@@ -28,7 +28,7 @@ class NewsListFragment : Fragment() {
         _binding = FragmentNewsListBinding.inflate(inflater, container, false)
 
         init()
-        viewModel.downloadData()
+        viewModel.init()
         return inflater.inflate(R.layout.fragment_news_list, container, false)
     }
 
