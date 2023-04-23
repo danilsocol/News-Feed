@@ -1,10 +1,12 @@
 package com.example.news_feed.adapters
 
+import android.support.v4.os.IResultReceiver.Default
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.news_feed.R
 import com.example.news_feed.models.NewsModel
 import com.example.news_feed.databinding.ViewTypeBinding
 import com.example.news_feed.databinding.ViewTypeImageBinding
@@ -15,7 +17,7 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return when (viewType) {
-            0 -> {
+            R.layout.view_type_image -> {
                 val binding = ViewTypeImageBinding.inflate( // текст на картинке
                     LayoutInflater.from(parent.context),
                     parent, false
@@ -23,7 +25,7 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
                 NewsHolderImage(binding)
             }
 
-            1 -> {
+            R.layout.view_type_image_hasbag -> {
                 val binding = ViewTypeImageBinding.inflate(  // текст на картинке с фоном
                     LayoutInflater.from(parent.context),
                     parent, false
@@ -31,7 +33,7 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
                 NewsHolderImageHasBag(binding)
             }
 
-            2 -> {
+            R.layout.view_type_image_hasbag -> {
                 val binding = ViewTypeImageCircleBinding.inflate(  // круглая картинка
                     LayoutInflater.from(parent.context),
                     parent, false
@@ -39,42 +41,46 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
                 NewsHolderImageCircle(binding)
             }
 
-            else -> {
+            R.layout.view_type -> {
                 val binding = ViewTypeBinding.inflate(  // текст
                     LayoutInflater.from(parent.context),
                     parent, false
                 )
                 NewsHolder(binding)
             }
+
+            else -> throw IllegalStateException("Неизвестный тип $viewType")
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is NewsModel.NewsModelImage -> 0
-            is NewsModel.NewsModelImageHasBag -> 1
-            is NewsModel.NewsModelCircleImage -> 2
-            else -> 4
+            is NewsModel.NewsModelImage -> R.layout.view_type_image
+            is NewsModel.NewsModelImageHasBag -> R.layout.view_type_image_hasbag
+            is NewsModel.NewsModelCircleImage -> R.layout.view_type_image_circle
+            is NewsModel.DefaultNewsModel -> R.layout.view_type
+            else -> Int.MAX_VALUE
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType) {
-            0 -> (holder as NewsHolderImage).bind(
+            R.layout.view_type_image -> (holder as NewsHolderImage).bind(
                 getItem(position) as NewsModel.NewsModelImage
             )
 
-            1 -> (holder as NewsHolderImageHasBag).bind(
+            R.layout.view_type_image_hasbag -> (holder as NewsHolderImageHasBag).bind(
                 getItem(position) as NewsModel.NewsModelImageHasBag
             )
 
-            2 -> (holder as NewsHolderImageCircle).bind(
+            R.layout.view_type_image_circle -> (holder as NewsHolderImageCircle).bind(
                 getItem(position) as NewsModel.NewsModelCircleImage
             )
 
-            else -> (holder as NewsHolder).bind(
+            R.layout.view_type -> (holder as NewsHolder).bind(
                 getItem(position) as NewsModel
             )
+            else -> throw IllegalStateException("Неизвестный тип ${holder.itemViewType}")
         }
     }
 
