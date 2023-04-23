@@ -33,7 +33,7 @@ sealed class NewsModel (
     ) : NewsModel(title,subtitle)
 
     companion object Factory {
-        fun getTool(res: NewsRequest): NewsModel{
+        fun getNews(res: NewsRequest): NewsModel{
             return if (res.img == null) {
                 DefaultNewsModel(res.title, res.subtitle)
             } else if (res.isCircle != null) {
@@ -44,8 +44,8 @@ sealed class NewsModel (
                 NewsModelImage(res.title, res.subtitle, res.img)
             }
         }
-        fun getTools(responses: List<NewsRequest>): List<NewsModel>{
-            return responses.map { getTool(it) }
+        fun getAllNews(responses: List<NewsRequest>): List<NewsModel>{
+            return responses.map { getNews(it) }
         }
     }
 }

@@ -6,4 +6,4 @@ data class NewsRequest(
     val img: String? = null,
     val hasBag: String? = null,
     val isCircle: Boolean? = null,
-){}
+)
