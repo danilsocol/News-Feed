@@ -1,16 +1,19 @@
 package com.example.news_feed.adapters
 
-import android.support.v4.os.IResultReceiver.Default
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.news_feed.R
 import com.example.news_feed.models.NewsModel
 import com.example.news_feed.databinding.ViewTypeBinding
 import com.example.news_feed.databinding.ViewTypeImageBinding
 import com.example.news_feed.databinding.ViewTypeImageCircleBinding
+import com.squareup.picasso.Picasso
 
 
 class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiffCallback()) {
@@ -33,7 +36,7 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
                 NewsHolderImageHasBag(binding)
             }
 
-            R.layout.view_type_image_hasbag -> {
+            R.layout.view_type_image_circle -> {
                 val binding = ViewTypeImageCircleBinding.inflate(  // круглая картинка
                     LayoutInflater.from(parent.context),
                     parent, false
@@ -78,7 +81,7 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
             )
 
             R.layout.view_type -> (holder as NewsHolder).bind(
-                getItem(position) as NewsModel
+                getItem(position) as NewsModel.DefaultNewsModel
             )
             else -> throw IllegalStateException("Неизвестный тип ${holder.itemViewType}")
         }
@@ -90,7 +93,12 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
         fun bind(news: NewsModel.NewsModelImage) = with(binding) {
             header.text = news.title
             subHeader.text = news.subtitle
-            /*image.setImageResource()*/ //todo скачивание картинки
+           /* val img = news.img!!.toUri().buildUpon().scheme("https").build()
+            image.load(img){
+                placeholder(R.drawable.loading_animation)
+               *//* error(R.drawable.ic_broken_image)*//*
+            }*/
+            Picasso.get().load(news.img).into(image)
         }
     }
 
@@ -100,7 +108,13 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
             header.text = news.title
             subHeader.text = news.subtitle
             /*containerText.setBackgroundColor(news.hasBag) */ //todo изменить цвет
-            /*image.setImageResource()*/ //todo скачивание картинки
+            /*val img = news.img!!.toUri().buildUpon().scheme("https").build()
+            image.load(img){
+                placeholder(R.drawable.loading_animation)
+                *//*error(R.drawable.ic_broken_image)*//*
+            }*/
+
+            Picasso.get().load(news.img).into(image)
         }
     }
 
@@ -109,7 +123,14 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
         fun bind(news: NewsModel.NewsModelCircleImage) = with(binding) {
             header.text = news.title
             subHeader.text = news.subtitle
-            /*image.setImageResource()*/ //todo скачивание картинки
+
+            Log.d("test",news.img!!)
+          /*  news.img.let {
+                val imgUri = news.img!!.toUri().buildUpon().scheme("https").build()
+                image.load(imgUri)
+            }*/
+
+            Picasso.get().load(news.img).into(image)
         }
     }
 
