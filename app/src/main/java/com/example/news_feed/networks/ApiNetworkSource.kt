@@ -14,7 +14,7 @@ class ApiNetworkSource : INetworkSource {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private val newsApi = retrofit.create(NewsAPI::class.java)
+    val newsApi = retrofit.create(NewsAPI::class.java)
 
     override fun sendData(liveData: MutableLiveData<List<NewsModel>>){
         GlobalScope.launch {

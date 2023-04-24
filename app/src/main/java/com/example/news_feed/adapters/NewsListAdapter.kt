@@ -1,6 +1,6 @@
 package com.example.news_feed.adapters
 
-import android.util.Log
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -85,7 +85,6 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
         }
     }
 
-
     class NewsHolderImage(private val binding: ViewTypeImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(news: NewsModel.NewsModelImage) = with(binding) {
@@ -103,6 +102,10 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
         fun bind(news: NewsModel.NewsModelImageHasBag) = with(binding) {
             header.text = news.title
             subHeader.text = news.subtitle
+
+            val color = Color.parseColor(news.hasBag)
+            containerText.setBackgroundColor(color)
+
             Picasso.get().load(news.img)
                 .placeholder(R.drawable.animeted_loading)
                 .error(R.drawable.ic_broken_image)
@@ -129,7 +132,6 @@ class NewsListAdapter() : ListAdapter<NewsModel, RecyclerView.ViewHolder>(MyDiff
             subHeader.text = news.subtitle
         }
     }
-
 
     class MyDiffCallback : DiffUtil.ItemCallback<NewsModel>() {
 
