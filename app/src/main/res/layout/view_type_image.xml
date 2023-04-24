@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:paddingHorizontal="24dp"
-            android:paddingVertical="23dp"
+            android:paddingVertical="19dp"
             app:layout_constraintStart_toStartOf="@+id/image"
             app:layout_constraintEnd_toEndOf="@+id/image"
             app:layout_constraintBottom_toBottomOf="@+id/image">
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="24dp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:text="Header"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="17dp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:text="Sample text, sample text, sample text, sample text"
                 app:layout_constraintTop_toBottomOf="@+id/header"
                 app:layout_constraintStart_toStartOf="parent"/>
