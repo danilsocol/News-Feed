@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.news_feed.models.NewsModel
 import com.example.news_feed.networks.ApiNetworkSource
 import com.example.news_feed.networks.INetworkSource
-import com.example.news_feed.repository.RetrofitBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
