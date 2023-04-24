@@ -16,10 +16,9 @@ class NewsFragmentViewModel : ViewModel() {
     val liveData = MutableLiveData<List<NewsModel>>()
     private val network: INetworkSource = ApiNetworkSource()
     fun init() {
-        network.sendData(liveData)
         viewModelScope.launch{
             val response = withContext(Dispatchers.IO) {
-                RetrofitBuilder.newsApi.getNews()
+                network.sendData()
             }
             if (response.isSuccessful) {
                 val responses = response.body()

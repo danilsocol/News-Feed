@@ -4,10 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import com.example.news_feed.models.NewsModel
 import com.example.news_feed.networks.INetworkSource
 
-class Mock : INetworkSource {
-    override fun sendData(liveData: MutableLiveData<List<NewsModel>>) {
+class Mock {
+
+    fun sendData(liveData: MutableLiveData<List<NewsModel>>) {
         val tools = getTools()
-        liveData.postValue(tools)
     }
     private fun getTools():List<NewsModel>{
         return listOf(
