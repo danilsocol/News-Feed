@@ -1,27 +1,25 @@
 package com.example.news_feed.di
 
-import com.example.news_feed.repository.NewsAPI
+import com.example.news_feed.retrofit.NewsAPI
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 class NetworkModule {
 
-    private var retrofit: Retrofit? = null
-
     @Provides
-    fun getRetrofit( baseUrl : String): Retrofit? {
-        if (retrofit == null) {
-            retrofit = Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        }
-        return retrofit
+    @Singleton
+    fun getRetrofit( ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://develtop.ru/study/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
+    @Singleton
     @Provides
     fun getApi(retrofit: Retrofit) : NewsAPI {
         return retrofit.create(NewsAPI::class.java)

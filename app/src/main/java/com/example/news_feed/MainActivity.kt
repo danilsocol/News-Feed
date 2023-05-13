@@ -3,7 +3,6 @@ package com.example.news_feed
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.news_feed.databinding.ActivityMainBinding
-import com.example.news_feed.repository.RetrofitBuilder
 
 class MainActivity : AppCompatActivity() {
 

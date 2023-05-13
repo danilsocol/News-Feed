@@ -1,23 +1,28 @@
 package com.example.news_feed
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.news_feed.adapters.NewsListAdapter
 import com.example.news_feed.databinding.FragmentNewsListBinding
 import com.example.news_feed.models.NewsModel
 import com.example.news_feed.viewModels.NewsFragmentViewModel
+import com.example.news_feed.viewModels.NewsFragmentViewModelFactory
+import javax.inject.Inject
 
 class NewsListFragment : Fragment() {
 
     private var _binding: FragmentNewsListBinding? = null
     private val newsAdapter = NewsListAdapter()
-    private val viewModel = NewsFragmentViewModel()
+
+    @Inject
+    lateinit var viewModelFactory: NewsFragmentViewModelFactory
+    private lateinit var viewModel : NewsFragmentViewModel
 
     private val binding get() = _binding!!
 
@@ -33,6 +38,9 @@ class NewsListFragment : Fragment() {
     }
 
     private fun init() {
+        (activity?.application as NewsApplication).applicationComponent.inject(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(NewsFragmentViewModel::class.java)
+
         binding.rcView.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.VERTICAL, false
@@ -40,7 +48,6 @@ class NewsListFragment : Fragment() {
         binding.rcView.adapter = newsAdapter
 
         val observer = Observer<List<NewsModel>> { newValue ->
-            Log.d("value", newValue.toString())
             newsAdapter.submitList(newValue)
         }
         viewModel.liveData.observe(viewLifecycleOwner, observer)

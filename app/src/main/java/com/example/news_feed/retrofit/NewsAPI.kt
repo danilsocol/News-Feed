@@ -1,4 +1,4 @@
-package com.example.news_feed.repository
+package com.example.news_feed.retrofit
 
 import com.example.news_feed.models.NewsRequest
 import retrofit2.Response

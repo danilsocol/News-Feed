@@ -6,7 +6,7 @@ import com.example.news_feed.di.DaggerApplicationComponent
 
 
 class NewsApplication : Application() {
-    private lateinit var applicationComponent: ApplicationComponent
+    lateinit var applicationComponent: ApplicationComponent
 
     override fun onCreate() {
         super.onCreate()

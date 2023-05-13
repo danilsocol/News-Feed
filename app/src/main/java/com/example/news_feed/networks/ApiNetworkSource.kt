@@ -1,17 +1,17 @@
 package com.example.news_feed.networks
 
 import com.example.news_feed.models.NewsRequest
-import com.example.news_feed.repository.NewsAPI
-import com.example.news_feed.repository.RetrofitBuilder
+import com.example.news_feed.retrofit.NewsAPI
 import retrofit2.Response
+import javax.inject.Inject
 
 class ApiNetworkSource : INetworkSource {
 
-    private val retrofit = RetrofitBuilder.getClient()
-    private val api = retrofit!!.create(NewsAPI::class.java)
+    @Inject
+    lateinit var newsApi: NewsAPI
     override suspend fun sendData() : Response<List<NewsRequest>>
     {
-        return api.getNews()
+        return newsApi.getNews()
     }
 }
 
