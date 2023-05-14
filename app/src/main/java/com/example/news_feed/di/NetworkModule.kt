@@ -1,5 +1,7 @@
 package com.example.news_feed.di
 
+import com.example.news_feed.repository.NewsRepository
+import com.example.news_feed.repository.NewsRepositoryImpl
 import com.example.news_feed.retrofit.NewsAPI
 import dagger.Module
 import dagger.Provides
@@ -12,7 +14,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun getRetrofit( ): Retrofit {
+    fun provideGetRetrofit( ): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://develtop.ru/study/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -21,7 +23,13 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun getApi(retrofit: Retrofit) : NewsAPI {
+    fun provideGetApi(retrofit: Retrofit) : NewsAPI {
         return retrofit.create(NewsAPI::class.java)
+    }
+
+
+    @Provides
+    fun provideNewsRepository(newsApi: NewsAPI): NewsRepository {
+        return NewsRepositoryImpl(newsApi)
     }
 }

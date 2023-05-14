@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class NewsRepositoryImpl @Inject constructor(private val newsApi: NewsAPI) : NewsRepository {
+class NewsRepositoryImpl @Inject constructor(private val newsApi: NewsAPI) : NewsRepository { //todo нужен ли inject
 
     //val liveData = MutableLiveData<List<NewsModel>>()
 

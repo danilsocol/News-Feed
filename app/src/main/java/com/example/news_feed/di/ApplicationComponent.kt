@@ -5,7 +5,7 @@ import com.example.news_feed.NewsListFragment
 import dagger.Component
 import javax.inject.Singleton
 
-@Component(modules = [NetworkModule::class])
+@Component(modules = [NetworkModule::class, UseCaseModule::class])
 @Singleton
 interface ApplicationComponent {
     fun inject(mainActivity: MainActivity)
