@@ -5,7 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface NewsAPI {
-
     @GET("new_text.json")
     suspend fun getNews(): Response<List<NewsRequest>>
 

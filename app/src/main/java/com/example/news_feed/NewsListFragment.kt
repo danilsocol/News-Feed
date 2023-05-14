@@ -39,7 +39,7 @@ class NewsListFragment : Fragment() {
 
     private fun init() {
         (activity?.application as NewsApplication).applicationComponent.inject(this)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(NewsFragmentViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)[NewsFragmentViewModel::class.java]
 
         binding.rcView.layoutManager = LinearLayoutManager(
             context,

@@ -5,27 +5,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.news_feed.models.NewsModel
-import com.example.news_feed.repository.NewsRepository
-import com.example.news_feed.retrofit.NewsAPI
-import kotlinx.coroutines.Dispatchers
+import com.example.news_feed.repository.NewsRepositoryImpl
+import com.example.news_feed.useCase.GetAllNewsUseCase
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class NewsFragmentViewModel(private val repository: NewsRepository) : ViewModel() {
+class NewsFragmentViewModel(private val getAllNewsUseCase: GetAllNewsUseCase) : ViewModel() {
 
-    val liveData : MutableLiveData<List<NewsModel>>
-        get() = repository.liveData
+    var liveData = MutableLiveData<List<NewsModel>>() //todo изменить на private
+
     fun init() {
         viewModelScope.launch{
-           repository.getNews()
+            liveData.value = getAllNewsUseCase.execute()
         }
     }
 
 }
-class NewsFragmentViewModelFactory @Inject constructor(private val repository: NewsRepository) :
+class NewsFragmentViewModelFactory @Inject constructor(private val getAllNewsUseCase: GetAllNewsUseCase) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return NewsFragmentViewModel(repository) as T
+        return NewsFragmentViewModel(getAllNewsUseCase) as T
     }
 }
