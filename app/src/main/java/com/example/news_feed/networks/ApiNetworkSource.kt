@@ -1,3 +1,4 @@
+/*
 package com.example.news_feed.networks
 
 import com.example.news_feed.models.NewsRequest
@@ -15,3 +16,4 @@ class ApiNetworkSource : INetworkSource {
     }
 }
 
+*/

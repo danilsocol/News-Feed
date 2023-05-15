@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.news_feed.models.NewsModel
-import com.example.news_feed.repository.NewsRepositoryImpl
 import com.example.news_feed.useCase.GetAllNewsUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject

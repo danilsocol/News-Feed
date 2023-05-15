@@ -11,7 +11,6 @@ import javax.inject.Singleton
 
 @Module
 class UseCaseModule {
-
     @Singleton
     @Provides
     fun provideGetAllNewsUseCase(repository: NewsRepository) : GetAllNewsUseCase{

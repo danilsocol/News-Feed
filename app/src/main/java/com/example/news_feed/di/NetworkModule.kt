@@ -27,9 +27,4 @@ class NetworkModule {
         return retrofit.create(NewsAPI::class.java)
     }
 
-
-    @Provides
-    fun provideNewsRepository(newsApi: NewsAPI): NewsRepository {
-        return NewsRepositoryImpl(newsApi)
-    }
 }
